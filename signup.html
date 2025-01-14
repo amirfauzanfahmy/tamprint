@@ -27,157 +27,177 @@
         }
 
         header {
-  background-color: rgba(76, 175, 79, 0.9);
-  color: rgb(0, 0, 0);
-  padding: 10px 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center; /* Ensures vertical alignment of all items */
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 1000;
-}
+            background-color: rgba(76, 175, 79, 0.9);
+            color: rgb(0, 0, 0);
+            padding: 5px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+        }
 
-.logo {
-  display: flex;
-  align-items: center; /* Aligns logo and text vertically */
-}
+        .logo {
+            display: flex;
+            align-items: center;
+        }
 
-.logo img {
-  width: 30px;
-  height: 30px;
-  margin-right: 10px;
-  border-radius: 15px;
-}
+        .logo img {
+            width: 30px;
+            height: 30px;
+            margin-right: 10px;
+            border-radius: 15px;
+        }
 
-.logo h1 {
-  font-size: 24px;
-  color: #000000;
-  margin: 0; /* Removes default margin */
-}
+        .logo h1 {
+            font-size: 24px;
+            color: #000000;
+        }
 
-.nav {
-  list-style: none;
-  display: flex;
-  margin: 0; /* Removes default margin */
-  padding: 0; /* Removes default padding */
-}
+        .nav {
+            list-style: none;
+            display: flex;
+        }
 
-.nav li {
-  margin-left: 20px;
-}
+        .nav li {
+            margin-left: 20px;
+        }
 
-.nav a {
-  text-decoration: none;
-  color: #050505;
-  font-size: 16px;
-  transition: color 0.3s ease;
-}
+        .nav a {
+            text-decoration: none;
+            color: #050505;
+            font-size: 16px;
+            transition: color 0.3s ease;
+        }
 
-.nav a:hover {
-  color: #d4f1d7;
-}
-    /* Main container styling */
-    .container {
-      background-color: rgba(255, 255, 255, 0.9);
-      width: 40%;
-      padding: 40px 30px;
-      margin: 100px auto;
-      border-radius: 10px;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    }
+        .nav a:hover {
+            color: #d4f1d7;
+        }
 
-    h1 {
-      text-align: center;
-      color: #4CAF50;
-      margin-bottom: 20px;
-    }
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: #000;
+            cursor: pointer;
+        }
 
-    label {
-      font-size: 16px;
-      margin-bottom: 8px;
-      display: block;
-      color: #555;
-    }
+        .menu-toggle .fas {
+            color: #fff;
+        }
 
-    input[type="text"],
-    input[type="password"],
-    input[type="email"] {
-      width: 100%;
-      padding: 12px;
-      margin: 10px 0 20px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      box-sizing: border-box;
-      font-size: 16px;
-      outline: none;
-      transition: border-color 0.3s ease;
-    }
+        @media (max-width: 768px) {
+            .nav {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                right: 20px;
+                background-color: rgba(76, 175, 79, 0.9);
+                border-radius: 5px;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+                padding: 10px;
+            }
 
-    input[type="text"]:focus,
-    input[type="password"]:focus,
-    input[type="email"]:focus {
-      border-color: #4CAF50;
-    }
+            .nav.active {
+                display: flex;
+            }
 
-    button {
-      background-color: #4CAF50;
-      color: white;
-      padding: 14px;
-      margin: 8px 0;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      width: 100%;
-      font-size: 16px;
-      transition: background-color 0.3s ease;
-    }
+            .menu-toggle {
+                display: block;
+            }
 
-    button:hover {
-      background-color: #45a049;
-    }
+            .nav li {
+                margin: 10px 0;
+            }
+        }
 
-    p {
-      text-align: center;
-      font-size: 14px;
-    }
+        /* Main container styling */
+        .container {
+            background-color: rgba(255, 255, 255, 0.9);
+            width: auto;
+            padding: 40px 30px;
+            margin: 100px auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
 
-    p a {
-      color: #4CAF50;
-      text-decoration: none;
-      font-weight: bold;
-    }
+        h1 {
+            text-align: center;
+            color: #4CAF50;
+            margin-bottom: 20px;
+        }
 
-    p a:hover {
-      text-decoration: underline;
-    }
+        label {
+            font-size: 16px;
+            margin-bottom: 8px;
+            display: block;
+            color: #555;
+        }
 
-    /* Footer styling */
-    footer {
+        input[type="text"],
+        input[type="password"],
+        input[type="email"] {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+            font-size: 16px;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+
+        input[type="text"]:focus,
+        input[type="password"]:focus,
+        input[type="email"]:focus {
+            border-color: #4CAF50;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 14px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        p {
+            text-align: center;
+            font-size: 14px;
+        }
+
+        p a {
+            color: #4CAF50;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        p a:hover {
+            text-decoration: underline;
+        }
+
+        footer {
             background-color: #4CAF50;
             color: white;
             text-align: center;
             padding: 20px 10px;
             margin-top: auto;
-        }
-
-        footer .footer-links {
-            margin-bottom: 10px;
-        }
-
-        footer .footer-links a {
-            text-decoration: none;
-            color: white;
-            margin: 0 10px;
-            font-size: 14px;
-            transition: color 0.3s ease;
-        }
-
-        footer .footer-links a:hover {
-            color: #d4f1d7;
         }
 
         footer .social-icons {
@@ -199,36 +219,7 @@
             font-size: 14px;
             margin-top: 10px;
         }
-
-        @media (max-width: 480px) {
-            .info-item {
-                width: 100%;
-            }
-
-            footer .footer-links {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-            }
-
-            footer .footer-links a {
-                margin-bottom: 5px;
-            }
-        }
-
-    /* Responsive Design */
-    @media (max-width: 768px) {
-      .container {
-        width: 80%;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .container {
-        width: 90%;
-      }
-    }
-  </style>
+    </style>
 </head>
 <body>
   <header>
@@ -239,13 +230,16 @@
       <h1>TAMPRINT</h1>
     </div>
     <nav>
-        <ul class="nav">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="myorder.html">My order</a></li>
-            <li><a href="services.html">Services</a></li>
-            <li><a href="about.html">About Us</a></li>
-            <li><a href="contact.html">Contact</a></li>
-        </ul>
+      <ul class="nav">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="myorder.html">My order</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <button class="menu-toggle" aria-label="Toggle Menu">
+        <i class="fas fa-bars"></i>
+      </button>
     </nav>
   </header>
 
@@ -284,6 +278,14 @@
   </footer>
 
   <script>
+    const menuToggle = document.querySelector('.menu-toggle');
+    const nav = document.querySelector('.nav');
+
+    menuToggle.addEventListener('click', () => {
+      nav.classList.toggle('active');
+    });
+
+    // Form submission and sign-up functionality
     document.getElementById('signupForm').addEventListener('submit', function(event) {
       event.preventDefault(); // Prevent form submission
 
