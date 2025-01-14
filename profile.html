@@ -68,7 +68,57 @@
         }
 
         .nav a:hover {
-            color: #145d1c;
+            color: #ffffff;
+        }
+
+        /* Hamburger menu styles */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .hamburger div {
+            width: 25px;
+            height: 3px;
+            background-color: #ffffff;
+            margin: 3px 0;
+        }
+
+        .nav-wrapper {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav.hidden {
+            display: none;
+            flex-direction: column;
+            background-color: rgba(76, 175, 79, 0.9);
+            position: absolute;
+            top: 60px;
+            right: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+            border-radius: 5px;
+            padding: 10px;
+        }
+
+        .nav.hidden li {
+            margin: 10px 0;
+        }
+
+        @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
+            }
+
+            .nav {
+                display: none;
+                position: absolute;
+            }
+
+            .nav.show {
+                display: flex;
+            }
         }
 
         /* Profile Container */
@@ -217,22 +267,29 @@
             </a>
             <h1>TAMPRINT</h1>
         </div>
-        <nav>
-            <ul class="nav">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="myorder.html">My order</a></li>
-                <li><a href="services.html">Services</a></li>
-                <li><a href="about.html">About Us</a></li>
-                <li><a href="contact.html">Contact</a></li>
-            </ul>
-        </nav>
+        <div class="nav-wrapper">
+            <div class="hamburger" onclick="toggleMenu()">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+            <nav>
+                <ul class="nav hidden">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="myorder.html">My order</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
     </header>
 
     <div class="container">
         <div class="sidebar">
             <h2>Navigation</h2>
             <a href="#" onclick="showSection('myAccount')">My Account</a>
-            <a href="#" onclick="showSection('myOrder')">My Order</a>
+            <a href="myorder.html">My Order</a>
             <a href="#" onclick="showSection('changePassword')">Change Password</a>
             <a href="#" onclick="logout()">Logout</a>
         </div>
@@ -286,12 +343,11 @@
 
         <div id="changePassword" class="profile-box" style="display: none;">
             <h1>Change Password</h1>
-            <label for="currentPassword">Current Password</label>
-            <input type="password" id="currentPassword" placeholder="Enter current password" />
-            <label for="newPassword">New Password</label>
-            <input type="password" id="newPassword" placeholder="Enter new password" />
-            <label for="confirmPassword">Confirm Password</label>
-            <input type="password" id="confirmPassword" placeholder="Confirm new password" />
+            <div style="display: flex; gap: 10px; flex-wrap: wrap; align-items: center;">
+                <input type="password" id="currentPassword" placeholder="Current Password" />
+                <input type="password" id="newPassword" placeholder="New Password" />
+                <input type="password" id="confirmPassword" placeholder="Confirm Password" />
+            </div>
             <button type="button" onclick="changePassword()">Change Password</button>
         </div>
     </div>
@@ -312,16 +368,14 @@
     </footer>
 
     <script>
-        // Function to check if the user is logged in
         function checkLogin() {
             const profile = JSON.parse(localStorage.getItem('profile'));
             if (!profile) {
                 alert('You must be logged in to view this page.');
-                window.location.href = 'login.html'; // Redirect to login page
+                window.location.href = 'login.html';
             }
         }
 
-        // Load profile data from localStorage when the page loads
         function loadProfile() {
             const profile = JSON.parse(localStorage.getItem('profile')) || {};
             document.getElementById('displayUsername').innerText = profile.username || 'Not set';
@@ -329,28 +383,25 @@
             document.getElementById('displayEmail').innerText = profile.email || 'Not set';
         }
 
-        // Save updated profile data to localStorage
         function saveProfile() {
             const username = document.getElementById('username').value;
             const phone = document.getElementById('phone').value;
             const email = document.getElementById('email').value;
 
             const profile = { username, phone, email };
-            localStorage.setItem('profile', JSON.stringify(profile)); // Store updated profile in localStorage
+            localStorage.setItem('profile', JSON.stringify(profile));
 
             alert('Profile updated successfully!');
-            loadProfile(); // Update the displayed profile
-            showSection('myAccount'); // Switch back to profile view
+            loadProfile();
+            showSection('myAccount');
         }
 
-        // Logout function to clear user profile and redirect to login page
         function logout() {
-            localStorage.removeItem('profile'); // Clear saved profile
+            localStorage.removeItem('profile');
             alert('You have been logged out.');
-            window.location.href = 'login.html'; // Redirect to login page
+            window.location.href = 'login.html';
         }
 
-        // Change password functionality
         function changePassword() {
             const currentPassword = document.getElementById('currentPassword').value;
             const newPassword = document.getElementById('newPassword').value;
@@ -364,7 +415,6 @@
             alert('Password changed successfully!');
         }
 
-        // Show the correct section (My Account, My Order, Change Password)
         function showSection(sectionId) {
             document.getElementById('myAccount').style.display = sectionId === 'myAccount' ? 'block' : 'none';
             document.getElementById('myOrder').style.display = sectionId === 'myOrder' ? 'block' : 'none';
@@ -372,15 +422,18 @@
             document.getElementById('editProfile').style.display = sectionId === 'editProfile' ? 'block' : 'none';
         }
 
-        // Show the edit profile form
         function showEditProfile() {
             showSection('editProfile');
         }
 
-        // Load profile and check login status when page loads
+        function toggleMenu() {
+            const nav = document.querySelector('.nav');
+            nav.classList.toggle('show');
+        }
+
         window.onload = function() {
             checkLogin();
-            loadProfile(); // Load profile data when the page loads
+            loadProfile();
         }
     </script>
 </body>
