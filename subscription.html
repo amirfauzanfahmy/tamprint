@@ -29,7 +29,7 @@
         header {
             background-color: rgba(76, 175, 79, 0.9);
             color: rgb(0, 0, 0);
-            padding: 10px 20px;
+            padding: 0px 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -79,10 +79,50 @@
             color: #d4f1d7;
         }
 
+        /* Hamburger menu styles */
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: #000;
+            cursor: pointer;
+        }
+
+        .menu-toggle .fas {
+            color: #fff;
+        }
+
+        @media (max-width: 768px) {
+            .nav {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                right: 20px;
+                background-color: rgba(76, 175, 79, 0.9);
+                border-radius: 5px;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+                padding: 10px;
+            }
+
+            .nav.active {
+                display: flex;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .nav li {
+                margin: 10px 0;
+            }
+        }
+
         /* Main container styling */
         .container {
             background-color: rgba(255, 255, 255, 0.9);
-            width: 40%;
+            width: auto;
             padding: 40px 30px;
             margin: 100px auto;
             border-radius: 10px;
@@ -208,58 +248,6 @@
             font-size: 14px;
             margin-top: 10px;
         }
-
-        @media (max-width: 768px) {
-            .container {
-                width: 80%;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .container {
-                width: 90%;
-            }
-        }
-
-        .benefits-section {
-            background-color: #eaf8e4;
-            padding: 20px;
-            margin-top: 30px;
-            border-radius: 10px;
-        }
-
-        .benefits-section h2 {
-            text-align: center;
-            color: #4CAF50;
-            margin-bottom: 20px;
-        }
-
-        .benefits-list {
-            list-style-type: disc;
-            padding-left: 20px;
-            color: #555;
-        }
-
-        .no-subscription-option {
-            background-color: #4CAF50;
-            color: white;
-            padding: 14px;
-            margin: 8px 0;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            width: 100%;
-            font-size: 16px;
-            transition: background-color 0.3s ease;
-            position: relative;
-            display: inline-block;
-            text-align: center;
-        }
-
-        .no-subscription-option:hover {
-            background-color: #e53935;
-        }
-
     </style>
 </head>
 <body>
@@ -278,27 +266,19 @@
                 <li><a href="about.html">About Us</a></li>
                 <li><a href="contact.html">Contact</a></li>
             </ul>
+            <button class="menu-toggle" aria-label="Toggle Menu">
+                <i class="fas fa-bars"></i>
+            </button>
         </nav>
     </header>
 
     <div class="container">
         <h1>Subscribe to Our Services</h1>
-        <!-- Exclusive Subscriber Benefits -->
-        <div class="benefits-section">
-            <h2>Exclusive Subscriber Benefits</h2>
-            <ul class="benefits-list">
-                <li><strong>Canva Premium Access:</strong> Create stunning designs with professional templates and high-resolution downloads.</li>
-                <li><strong>Priority Processing:</strong> Faster processing times for subscribers.</li>
-                <li><strong>Exclusive Discounts:</strong> Special offers for loyal customers.</li>
-            </ul>
-        </div>
-        <br>
         <div class="form-group">
             <label for="email">Your Email:</label>
             <input type="email" id="email" placeholder="Enter your email" required>
         </div>
 
-        <!-- Subscription Options -->
         <div class="subscription-options">
             <div>
                 <input type="radio" id="monthly" name="subscription" value="monthly">
@@ -312,14 +292,13 @@
 
         <button type="button" onclick="subscribe()">Subscribe</button>
 
-        <!-- No Subscription Option -->
         <div>
             <br>
-            <a href="services.html" class="no-subscription-option">No, thanks</a>
+            <button> <a href="services.html" class="no-subscription-option">No, thanks</a>
         </div>
-        <br>
-        <p id="message">
 
+        <br>
+        <p id="message"></p>
     </div>
 
     <footer>
@@ -338,51 +317,45 @@
     </footer>
 
     <script>
-    function subscribe() {
-    const email = document.getElementById('email').value;
-    const monthlyOption = document.getElementById('monthly');
-    const yearlyOption = document.getElementById('yearly');
-    let subscriptionType = '';
+        const menuToggle = document.querySelector('.menu-toggle');
+        const nav = document.querySelector('.nav');
 
-    // Email format validation using regex
-    const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
-    if (!emailRegex.test(email)) {
-        document.getElementById('message').textContent = 'Please enter a valid email address.';
-        document.getElementById('message').style.color = 'red';
-        return;
-    }
+        menuToggle.addEventListener('click', () => {
+            nav.classList.toggle('active');
+        });
 
-    if (monthlyOption.checked) {
-        subscriptionType = 'Monthly (RM 5)';
-    } else if (yearlyOption.checked) {
-        subscriptionType = 'Yearly (RM 50)';
-    } else {
-        document.getElementById('message').textContent = 'Please select a subscription plan.';
-        document.getElementById('message').style.color = 'red';
-        return;
-    }
+        function subscribe() {
+            const email = document.getElementById('email').value;
+            const subscriptionOption = document.querySelector('input[name="subscription"]:checked');
 
-    let subscriptions = JSON.parse(localStorage.getItem('subscriptions')) || [];
+            if (!email) {
+                document.getElementById('message').textContent = 'Please enter a valid email address.';
+                return;
+            }
 
-    if (subscriptions.some(sub => sub.email === email)) {
-        document.getElementById('message').textContent = 'You are already subscribed!';
-        document.getElementById('message').style.color = 'red';
-        window.location.href = 'services.html';
-    } else {
-        subscriptions.push({ email, subscription: subscriptionType });
-        localStorage.setItem('subscriptions', JSON.stringify(subscriptions));
+            if (!subscriptionOption) {
+                document.getElementById('message').textContent = 'Please select a subscription plan.';
+                return;
+            }
 
-        document.getElementById('message').textContent = 'Thank you for subscribing!';
-        document.getElementById('message').style.color = 'green';
+            // Check if the user is already subscribed
+            const existingSubscription = localStorage.getItem('subscription');
+            if (existingSubscription) {
+                document.getElementById('message').textContent = 'You are already subscribed. Redirecting to Services.';
+                setTimeout(() => {
+                    window.location.href = 'services.html';
+                }, 2000); // Redirect after 2 seconds
+                return;
+            }
 
-        document.getElementById('email').value = '';
-        document.getElementById('monthly').checked = false;
-        document.getElementById('yearly').checked = false;
-
-        // Redirect to services page after successful subscription
-        window.location.href = 'services.html';
-    }
-}
-</script>
+            // Store subscription details in localStorage
+            const subscription = subscriptionOption.value;
+            localStorage.setItem('subscription', subscription);
+            document.getElementById('message').textContent = `You have successfully subscribed to the ${subscription} plan.`;
+            setTimeout(() => {
+                window.location.href = 'services.html';
+            }, 2000); // Redirect after 2 seconds
+        }
+    </script>
 </body>
 </html>
