@@ -33,6 +33,7 @@
             justify-content: space-between;
             align-items: center;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            position: relative;
         }
 
         .logo {
@@ -41,7 +42,7 @@
         }
 
         .logo img {
-            width: 30px; /* Adjust size as needed */
+            width: 30px;
             height: 30px;
             margin-right: 10px;
             border-radius: 15px;
@@ -52,24 +53,51 @@
             color: #000000;
         }
 
+        @media (max-width: 768px) {
         .nav {
-            list-style: none;
-            display: flex;
+         display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        right: 20px;
+        background-color: rgba(76, 175, 79, 0.9);
+        border-radius: 5px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        padding: 10px;
         }
 
-        .nav li {
-            margin-left: 20px;
+        .nav.active {
+        display: flex;
         }
 
         .nav a {
-            text-decoration: none;
-            color: #000000;
-            font-size: 16px;
-            transition: color 0.3s ease;
+        color: #fff;
+        text-decoration: none;
+        padding: 10px;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
         }
 
         .nav a:hover {
-            color: #145d1c;
+            background-color: #45a049;
+        }
+
+
+        .menu-toggle i {
+        font-size: 24px; /* Adjust this value to match the size of other icons */
+        color: #ffffff; /* Optional: Set the color to match your theme */
+        cursor: pointer;
+        transition: transform 0.3s ease; /* Optional: Add a hover effect */
+        }
+
+        .menu-toggle i:hover {
+        transform: scale(1.1); /* Optional: Slightly enlarge on hover */
+        }
+
+
+        .nav li {
+        margin: 10px;
+        }
         }
 
         .container {
@@ -92,6 +120,9 @@
             width: 45%;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             margin-bottom: 20px;
+            border: 1px solid #4CAF50; /* Add border */
+            padding: 15px; /* Add some padding for space inside the box */
+            background-color: #f9f9f9; /* Add background color to the box */
         }
 
         select, input[type="file"], input[type="radio"], input[type="number"], button {
@@ -125,7 +156,7 @@
             border-radius: 10px;
             margin-top: 20px;
             display: none;
-            overflow: auto; /* Allow scrolling for multi-page content */
+            overflow: auto;
         }
 
         .preview img {
@@ -185,42 +216,6 @@
             font-size: 14px;
             margin-top: 10px;
         }
-
-        @media (max-width: 480px) {
-            .info-item {
-                width: 100%;
-            }
-
-            footer .footer-links {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-            }
-
-            footer .footer-links a {
-                margin-bottom: 5px;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .container {
-                width: 80%;
-            }
-
-            .order-section {
-                width: 100%;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .container {
-                width: 90%;
-            }
-
-            .order-section {
-                width: 100%;
-            }
-        }
     </style>
 </head>
 <body>
@@ -231,14 +226,16 @@
             </a>
             <h1>TAMPRINT</h1>
         </div>
-        <nav>
-            <ul class="nav">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="myorder.html">My order</a></li>
-                <li><a href="services.html">Services</a></li>
-                <li><a href="about.html">About Us</a></li>
-                <li><a href="contact.html">Contact</a></li>
+        <nav class="nav">
+            <a href="index.html">Home</a>
+            <a href="myorder.html">My Order</a>
+            <a href="services.html">Services</a>
+            <a href="about.html">About Us</a>
+            <a href="contact.html">Contact</a>
             </ul>
+            <button class="menu-toggle" aria-label="Toggle Menu">
+                <i class="fas fa-bars"></i>
+            </button>
         </nav>
     </header>
 
@@ -285,7 +282,7 @@
 
             <label for="paymentMethod">Payment Method:</label>
             <select id="paymentMethod">
-                <option value="credit_card">Cash</option>
+                <option value="cash">Cash</option>
                 <option value="bank_transfer">Bank Transfer</option>
             </select>
 
@@ -309,10 +306,6 @@
     </div>
 
     <footer>
-        <div class="footer-links">
-            <a href="privacy.html">Privacy Policy</a> |
-            <a href="terms.html">Terms of Service</a>
-        </div>
         <div class="social-icons">
             <a href="#"><i class="fab fa-facebook"></i></a>
             <a href="#"><i class="fab fa-twitter"></i></a>
@@ -322,6 +315,14 @@
     </footer>
 
     <script>
+        // Hamburger Menu Functionality
+        const menuToggle = document.querySelector('.menu-toggle');
+        const nav = document.querySelector('.nav');
+
+        menuToggle.addEventListener('click', () => {
+            nav.classList.toggle('active');
+        });
+
         function resetPreview() {
             document.getElementById("previewSection").style.display = "none";
         }
