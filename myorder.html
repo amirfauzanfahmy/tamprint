@@ -9,7 +9,7 @@
     <style>
         /* General Styling */
         * {
-            margin:  0;
+            margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
@@ -27,12 +27,18 @@
         }
 
         header {
-            background-color: rgba(76, 175, 79, 0.8);
+            background-color: rgba(76, 175, 79, 0.9);
+            color: rgb(0, 0, 0);
             padding: 10px 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
         }
 
         .logo {
@@ -63,46 +69,85 @@
 
         .nav a {
             text-decoration: none;
-            color: #000000;
+            color: #050505;
             font-size: 16px;
             transition: color 0.3s ease;
         }
 
         .nav a:hover {
-            color: #145d1c;
+            color: #d4f1d7;
+        }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        .menu-toggle .fas {
+            color: #fff;
+        }
+
+        @media (max-width: 768px) {
+            .nav {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                right: 20px;
+                background-color: rgba(76, 175, 79, 0.9);
+                border-radius: 5px;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+                padding: 10px;
+                width: 200px; /* Ensure the menu fits within the page */
+            }
+
+            .nav.active {
+                display: flex;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .nav li {
+                margin: 10px 0;
+            }
         }
 
         .container {
-    flex-grow: 1;
-    max-width: 1000px;
-    margin: 30px auto;
-    padding: 30px;
-    background-color: white;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    overflow-x: auto; /* Allow horizontal scrolling */
-}
+            flex-grow: 1;
+            max-width:500px;
+            margin: 80px auto 30px; /* Added top margin to account for fixed header */
+            padding: 30px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            overflow-x: auto;
+            margin-top: 100px; /* Ensures content does not overlap with fixed header */
+        }
 
-table {
-    width: 100%;
-    min-width: px; /* Set a minimum width to prevent columns from cramping */
-    border-collapse: collapse;
-}
+        table {
+            width: 100%;
+            min-width: 600px;
+            border-collapse: collapse;
+        }
 
-th, td {
-    padding: 12px;
-    text-align: center;
-    border: 1px solid #ddd;
-    color: #333;
-    word-wrap: break-word; /* Wrap text to fit the cell */
-    word-break: break-word; /* Break long words */
-    overflow-wrap: break-word; /* Ensure text wraps properly */
-}
+        th, td {
+            padding: 12px;
+            text-align: center;
+            border: 1px solid #ddd;
+            color: #333;
+            word-wrap: break-word;
+        }
 
-th {
-    background-color: #4CAF50;
-    color: white;
-}
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
 
         td a {
             color: #4CAF50;
@@ -187,6 +232,9 @@ th {
                 <li><a href="about.html">About Us</a></li>
                 <li><a href="contact.html">Contact</a></li>
             </ul>
+            <button class="menu-toggle" aria-label="Toggle Menu">
+                <i class="fas fa-bars"></i>
+            </button>
         </nav>
     </header>
 
@@ -260,7 +308,7 @@ th {
                     }
 
                     const row = orderTable.insertRow();
-                    row.innerHTML = `
+                    row.innerHTML = `    
                         <td>${order.service}</td>
                         <td>${order.pages}</td>
                         <td>${order.format}</td>
@@ -295,18 +343,26 @@ th {
         }
 
         function deleteOrder(index) {
-            const orders = JSON.parse(localStorage.getItem('orders')) || [];
+            let orders = JSON.parse(localStorage.getItem('orders')) || [];
             orders.splice(index, 1);
             localStorage.setItem('orders', JSON.stringify(orders));
             displayOrders();
         }
 
         function continueToPay(index) {
-            const orders = JSON.parse(localStorage.getItem('orders')) || [];
+            let orders = JSON.parse(localStorage.getItem('orders')) || [];
             const order = orders[index];
-            const paymentPageUrl = `paymentpage.html?orderId=${index}&amount=${order.totalAmount || 0}`;
-            window.location.href = "paymentpage.html"
+            alert(`You are now proceeding to payment for the order: ${order.service}`);
+            // Proceed to payment logic can be added here
         }
+
+        // Toggle menu for small screens
+        const menuToggle = document.querySelector('.menu-toggle');
+        const nav = document.querySelector('.nav');
+
+        menuToggle.addEventListener('click', () => {
+            nav.classList.toggle('active');
+        });
 
         window.onload = displayOrders;
     </script>
