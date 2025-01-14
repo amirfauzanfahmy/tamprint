@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">    <title>About Us</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <title>About Us</title>
     <style>
         /* General Reset */
         * {
@@ -76,6 +77,45 @@
             color: #d4f1d7;
         }
 
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: #000;
+            cursor: pointer;
+        }
+
+        .menu-toggle .fas {
+            color: #fff;
+        }
+
+        @media (max-width: 768px) {
+            .nav {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                right: 20px;
+                background-color: rgba(76, 175, 79, 0.9);
+                border-radius: 5px;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+                padding: 10px;
+            }
+
+            .nav.active {
+                display: flex;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .nav li {
+                margin: 10px 0;
+            }
+        }
+
         .container {
             flex: 1;
             display: flex;
@@ -117,7 +157,6 @@
             font-size: 16px;
         }
 
-        
         footer {
             background-color: #4CAF50;
             color: white;
@@ -161,22 +200,6 @@
             font-size: 14px;
             margin-top: 10px;
         }
-
-        @media (max-width: 480px) {
-            .info-item {
-                width: 100%;
-            }
-
-            footer .footer-links {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-            }
-
-            footer .footer-links a {
-                margin-bottom: 5px;
-            }
-        }
     </style>
 </head>
 <body>
@@ -195,21 +218,24 @@
                 <li><a href="about.html">About Us</a></li>
                 <li><a href="contact.html">Contact</a></li>
             </ul>
+            <button class="menu-toggle" aria-label="Toggle Menu">
+                <i class="fas fa-bars"></i>
+            </button>
         </nav>
     </header>
 
     <div class="container">
         <div class="section">
             <h2>Welcome</h2>
-            <p>We provide high-quality, customizable printing solutions to empower students, professionals, and businesses with seamless, efficient, and sustainable services tailored to your needs.</p>
+            <p>Welcome to TAMPRINT, your trusted partner for high-quality, customizable printing solutions. Our mission is to empower students, professionals, and businesses by providing seamless, efficient, and sustainable printing services tailored to your needs.</p>
         </div>
         <div class="section">
             <h2>Who We Are</h2>
-            <p>Our team is passionate about making printing simple, accessible, and eco-friendly, catering to diverse needs from academic projects to creative personal designs.</p>
+            <p>We are a dedicated team passionate about making printing simple, accessible, and eco-friendly. Our platform is designed to accommodate your unique requirements, from academic projects and professional materials to creative personal designs.</p>
         </div>
         <div class="section">
             <h2>Our Vision</h2>
-            <p>We aim to be the leading print-on-demand platform, exceeding customer expectations through innovation, ethical practices, and exceptional service.</p>
+            <p>To become the leading print-on-demand platform that not only meets but exceeds customer expectations through innovation, ethical practices, and exceptional service.</p>
         </div>
         <div class="section">
             <h2>Why Choose Us?</h2>
@@ -243,5 +269,14 @@
         </div>
         <p>&copy; 2025 TAMPRINT. All rights reserved.</p>
     </footer>
+
+    <script>
+        const menuToggle = document.querySelector('.menu-toggle');
+        const nav = document.querySelector('.nav');
+
+        menuToggle.addEventListener('click', () => {
+            nav.classList.toggle('active');
+        });
+    </script>
 </body>
 </html>
