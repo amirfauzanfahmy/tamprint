@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <title>Contact Us</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         /* General Reset */
         * {
@@ -14,12 +14,12 @@
         }
 
         body {
-            font-family: 'Arial', sans-serif;
+            font-family: Arial, sans-serif;
             background-image: url('backgroundtamprint.jpg');
             background-size: cover;
             background-attachment: fixed;
             background-repeat: no-repeat;
-            color: #333;
+            color: #000000;
             display: flex;
             flex-direction: column;
             min-height: 100vh;
@@ -27,12 +27,12 @@
 
         header {
             background-color: rgba(76, 175, 79, 0.9);
-            color: white;
+            color: rgb(0, 0, 0);
             padding: 10px 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
             position: fixed;
             top: 0;
             left: 0;
@@ -54,7 +54,7 @@
 
         .logo h1 {
             font-size: 24px;
-            color: rgb(0, 0, 0);
+            color: #000000;
         }
 
         .nav {
@@ -68,7 +68,7 @@
 
         .nav a {
             text-decoration: none;
-            color: rgb(0, 0, 0);
+            color: #050505;
             font-size: 16px;
             transition: color 0.3s ease;
         }
@@ -77,90 +77,82 @@
             color: #d4f1d7;
         }
 
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: #000;
+            cursor: pointer;
+        }
+
+        .menu-toggle .fas {
+            color: #fff;
+        }
+
+        @media (max-width: 768px) {
+            .nav {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                right: 20px;
+                background-color: rgba(76, 175, 79, 0.9);
+                border-radius: 5px;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+                padding: 10px;
+            }
+
+            .nav.active {
+                display: flex;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .nav li {
+                margin: 10px 0;
+            }
+        }
+
         .container {
             flex: 1;
             display: flex;
-            align-items: center;
-            justify-content: center;
-            padding-top: 100px;
-        }
-
-        .contact-section {
-            background-color: rgba(255, 255, 255, 0.95);
-            padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-            text-align: center;
-            width: 90%;
+            flex-direction: column;
+            padding: 100px 20px 50px;
             max-width: 1200px;
-            word-wrap: break-word;
-            overflow-wrap: break-word;
-            overflow: hidden;
+            margin: 0 auto;
         }
 
-        .contact-section h1 {
-            margin-bottom: 20px;
-            color: #4CAF50;
-        }
-
-        .contact-text {
-            font-size: 18px;
-            margin-bottom: 30px;
-            color: #555;
-        }
-
-        .contact-info {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-around;
-            gap: 20px;
-        }
-
-        .info-item {
-            background-color: #f9f9f9;
+        .section {
+            background-color: rgba(255, 255, 255, 0.9);
             padding: 20px;
             border-radius: 10px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            text-align: center;
-            width: 30%;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            word-wrap: break-word;
-            overflow-wrap: break-word;
-            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+            text-align: left;
         }
 
-        .info-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-        }
-
-        .info-item h3 {
-            margin-bottom: 10px;
+        .section h2 {
             color: #4CAF50;
+            margin-bottom: 10px;
         }
 
-        .info-item p, .info-item ul {
+        .section p, .section ul {
+            line-height: 1.8;
             font-size: 16px;
             color: #555;
-            line-height: 1.6;
-            word-wrap: break-word;
-            overflow-wrap: break-word;
-            overflow: hidden;
         }
 
-        .info-item ul li {
-            margin-bottom: 5px;
+        .section ul {
+            margin-top: 10px;
+            padding-left: 20px;
+            list-style-type: disc;
         }
 
-        .info-item a {
-            text-decoration: none;
-            color: #4CAF50;
-            font-weight: bold;
-            transition: color 0.3s ease;
-        }
-
-        .info-item a:hover {
-            color: #3a9d3a;
+        .section ul li {
+            margin-bottom: 10px;
         }
 
         footer {
@@ -169,22 +161,6 @@
             text-align: center;
             padding: 20px 10px;
             margin-top: auto;
-        }
-
-        footer .footer-links {
-            margin-bottom: 10px;
-        }
-
-        footer .footer-links a {
-            text-decoration: none;
-            color: white;
-            margin: 0 10px;
-            font-size: 14px;
-            transition: color 0.3s ease;
-        }
-
-        footer .footer-links a:hover {
-            color: #d4f1d7;
         }
 
         footer .social-icons {
@@ -206,22 +182,6 @@
             font-size: 14px;
             margin-top: 10px;
         }
-
-        @media (max-width: 480px) {
-            .info-item {
-                width: 100%;
-            }
-
-            footer .footer-links {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-            }
-
-            footer .footer-links a {
-                margin-bottom: 5px;
-            }
-        }
     </style>
 </head>
 <body>
@@ -230,7 +190,7 @@
             <a href="profile.html">
                 <img src="gambaruser.png" alt="Profile Logo">
             </a>
-            <h1>CONTACT</h1>
+            <h1>Contact Us</h1>
         </div>
         <nav>
             <ul class="nav">
@@ -240,50 +200,50 @@
                 <li><a href="about.html">About Us</a></li>
                 <li><a href="contact.html">Contact</a></li>
             </ul>
+            <button class="menu-toggle" aria-label="Toggle Menu">
+                <i class="fas fa-bars"></i>
+            </button>
         </nav>
     </header>
 
     <div class="container">
-        <div class="contact-section">
-            <h1>Contact Information</h1>
-            <p class="contact-text">
-                We would love to hear from you! If you have any questions, concerns, or feedback, feel free to get in touch with us through the following contact details.
-            </p>
-            <div class="contact-info">
-                <div class="info-item">
-                    <h3>Visit Us:</h3>
-                    <p>Block G 1.7, Mahallah Ali,<br> Islamic International University Malaysia,<br> 53100 Kuala Lumpur</p>
-                </div>
-                <div class="info-item">
-                    <h3>Call Us:</h3>
-                    <p><a href="tel:+602345678890">+60 234 567 8890</a></p>
-                    <p><a href="mailto:tamprint@gmail.com">tamprint@gmail.com</a></p>
-                </div>
-                <div class="info-item">
-                    <h3>Hours of Operation:</h3>
-                    <ul>
-                        <li><strong>Monday - Friday:</strong> 8:00 AM - 12:00 PM</li>
-                        <li><strong>Saturday:</strong> 10:00 AM - 12:00 PM</li>
-                        <li><strong>Sunday:</strong> Closed</li>
-                    </ul>
-                </div>
-            </div>
+        <div class="section">
+            <h2>Contact Information</h2>
+            <p>We would love to hear from you! If you have any questions, concerns, or feedback, feel free to get in touch with us through the following contact details.</p>
+        </div>
+        <div class="section">
+            <h2>Contact Information</h2><ul>
+                <li><strong>Address:</strong> Block G 1.7, Mahallah Ali, IIUM, 53100 Kuala Lumpur</li>
+                <li><strong>Phone:</strong> <a href="tel:+60123456789">+60 1234 567 89</a></li>
+                <li><strong>Email:</strong> <a href="mailto:tamprint@gmail.com">tamprint@gmail.com</a></li>
+            </ul>
+        </div>
+        <div class="section">
+            <h2>Operating Hours</h2>
+            <ul>
+                <li><strong>Monday - Friday:</strong> 8:00 AM - 12:00 PM</li>
+                <li><strong>Saturday:</strong> 10:00 AM - 12:00 PM</li>
+                <li><strong>Sunday:</strong> Closed</li>
+            </ul>
         </div>
     </div>
 
     <footer>
         <div class="social-icons">
-            <a href="https://www.facebook.com/" aria-label="Facebook" target="_blank">
-                <i class="fab fa-facebook"></i>
-            </a>
-            <a href="https://www.twitter.com/" aria-label="Twitter" target="_blank">
-                <i class="fab fa-twitter"></i>
-            </a>
-            <a href="https://www.instagram.com/" aria-label="Instagram" target="_blank">
-                <i class="fab fa-instagram"></i>
-            </a>
+            <a href="https://www.facebook.com/" aria-label="Facebook" target="_blank"><i class="fab fa-facebook"></i></a>
+            <a href="https://www.twitter.com/" aria-label="Twitter" target="_blank"><i class="fab fa-twitter"></i></a>
+            <a href="https://www.instagram.com/" aria-label="Instagram" target="_blank"><i class="fab fa-instagram"></i></a>
         </div>
         <p>&copy; 2025 TAMPRINT. All rights reserved.</p>
     </footer>
+
+    <script>
+        const menuToggle = document.querySelector('.menu-toggle');
+        const nav = document.querySelector('.nav');
+
+        menuToggle.addEventListener('click', () => {
+            nav.classList.toggle('active');
+        });
+    </script>
 </body>
 </html>
